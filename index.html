@@ -1,29 +1,291 @@
 <!doctype html>
 <html>
+
 <head>
 	<title>Memorizer (Memorization Tool)</title>
 	<meta charset=utf-8>
 	<link href=https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css rel=stylesheet>
-	<style>html{transition:-webkit-filter 2s cubic-bezier(0.9,0.5,0.1,0.5);background-color:#fff}@supports(filter:invert(100%)){html{transition:filter 2s cubic-bezier(0.9,0.5,0.1,0.5)}}html.dark{-webkit-filter:invert(100%) grayscale(80%);filter:invert(100%) grayscale(80%)}html.dark :-webkit-full-screen{-webkit-filter:invert(100%) grayscale(80%);filter:invert(100%) grayscale(80%)}html.dark :-moz-full-screen{filter:invert(100%) grayscale(80%)}html.dark :-ms-fullscreen{filter:invert(100%) grayscale(80%)}html.dark :full-screen{-webkit-filter:invert(100%) grayscale(80%);filter:invert(100%) grayscale(80%)}body{background-color:#f0f6fd;min-height:100vh}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,h1 small,h2 small,h3 small,h4 small,h5 small,h6 small,.h1 small,.h2 small,.h3 small,.h4 small{font-weight:300}h1{margin:20px 0}.btn{-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 5px 0 rgba(0,0,0,0.2)}.btn-lg{border-radius:4px}.btn-sm{border-radius:3px}.btn-xs{border-radius:2px}.lead strong{font-weight:400}.share-top{top:25px;right:15px;position:absolute;min-width:244px}.share-bottom{margin-bottom:20px}.share-top>a{height:32px;line-height:32px}.share-top .at300bs{box-shadow:none}#stats>.label+.label{margin-left:5px}.panel-default{-webkit-box-shadow:none;box-shadow:none;border-color:#ccc}.btn-block{border-radius:0 0 3px 3px}.nav-tabs{border-color:#ccc}.nav-tabs>li.active>a,.nav-tabs>li.active>a:hover,.nav-tabs>li.active>a:focus{border-color:#ccc;border-bottom-color:#f0f6fd;background-color:transparent;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#fff),color-stop(1,rgba(255,255,255,0)));background-image:-webkit-linear-gradient(bottom,#fff,rgba(255,255,255,0));background-image:linear-gradient(to bottom,#fff,rgba(255,255,255,0))}.nav-tabs>li>a{-webkit-transition:.2s;transition:.2s}h1>a:not(:hover):not(:focus){color:#000!important}.well{padding:10px}.well>p{margin:0;-webkit-transition:.2s;transition:.2s}.item>p:last-child{margin-bottom:7px}.well>p,.text-md{font-size:100%}.text-lg{font-size:125%!important}.text-xl{font-size:150%!important}:-webkit-full-screen [data-fullscreen]{display:none}:-moz-full-screen [data-fullscreen]{display:none}:-ms-fullscreen [data-fullscreen]{display:none}:full-screen [data-fullscreen]{display:none}:-webkit-full-screen{width:100%;height:100%;overflow:scroll}:-moz-full-screen{background-color:#f0f6fd;overflow:scroll}:-ms-fullscreen{background-color:#f0f6fd;overflow:scroll}.addthis_counter{-moz-box-sizing:content-box;box-sizing:content-box}.at300bs{border-radius:3px;border:1px #ccc solid;-webkit-transition:.2s;transition:.2s;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,0.2);box-shadow:0 2px 5px 0 rgba(0,0,0,0.2)}#input{resize:vertical;border-radius:3px 3px 0 0}@media(max-width:767px){.col-lg-8{padding:0}.panel{border-radius:0}}@media(max-width:1199px){textarea{background-color:#f0f6fd!important}}@media(min-width:1200px){body{background:-webkit-linear-gradient(bottom,#f0f6fd 15%,#fff) no-repeat;background:linear-gradient(to bottom,#f0f6fd 15%,#fff) no-repeat}.panel-default{background-color:transparent;border-bottom:0;border-left:none;background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#fff),color-stop(0.9,rgba(255,255,255,0)));background-image:-webkit-linear-gradient(bottom,#fff,rgba(255,255,255,0) 90%);background-image:linear-gradient(to bottom,#fff,rgba(255,255,255,0) 90%)}.tab-content{padding:15px;border-radius:3px;border-top:1px solid #ccc;border-left:1px solid #ccc}.tab-pane>h2{margin-top:0}.nav-tabs{border:0}}</style>
-	<script type="text/javascript">
-	function UpdateSong(){
-		select = document.getElementById("SongSelector");
-		selected_value = select.options[select.selectedIndex].text;
-		console.log("Just clicked: " + String(selected_value));
-		if (selected_value in song_dict) {
-			input.value = song_dict[selected_value];
-			memorize();
+	<style>
+		html {
+			transition: -webkit-filter 2s cubic-bezier(0.9, 0.5, 0.1, 0.5);
+			background-color: #fff
 		}
 
-	}
-	</script>
+		@supports(filter:invert(100%)) {
+			html {
+				transition: filter 2s cubic-bezier(0.9, 0.5, 0.1, 0.5)
+			}
+		}
+
+		html.dark {
+			-webkit-filter: invert(100%) grayscale(80%);
+			filter: invert(100%) grayscale(80%)
+		}
+
+		html.dark :-webkit-full-screen {
+			-webkit-filter: invert(100%) grayscale(80%);
+			filter: invert(100%) grayscale(80%)
+		}
+
+		html.dark :-moz-full-screen {
+			filter: invert(100%) grayscale(80%)
+		}
+
+		html.dark :-ms-fullscreen {
+			filter: invert(100%) grayscale(80%)
+		}
+
+		html.dark :full-screen {
+			-webkit-filter: invert(100%) grayscale(80%);
+			filter: invert(100%) grayscale(80%)
+		}
+
+		body {
+			background-color: #f0f6fd;
+			min-height: 100vh
+		}
+
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		.h1,
+		.h2,
+		.h3,
+		.h4,
+		.h5,
+		.h6,
+		h1 small,
+		h2 small,
+		h3 small,
+		h4 small,
+		h5 small,
+		h6 small,
+		.h1 small,
+		.h2 small,
+		.h3 small,
+		.h4 small {
+			font-weight: 300
+		}
+
+		h1 {
+			margin: 20px 0
+		}
+
+		.btn {
+			-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2)
+		}
+
+		.btn-lg {
+			border-radius: 4px
+		}
+
+		.btn-sm {
+			border-radius: 3px
+		}
+
+		.btn-xs {
+			border-radius: 2px
+		}
+
+		.lead strong {
+			font-weight: 400
+		}
+
+		.share-top {
+			top: 25px;
+			right: 15px;
+			position: absolute;
+			min-width: 244px
+		}
+
+		.share-bottom {
+			margin-bottom: 20px
+		}
+
+		.share-top>a {
+			height: 32px;
+			line-height: 32px
+		}
+
+		.share-top .at300bs {
+			box-shadow: none
+		}
+
+		#stats>.label+.label {
+			margin-left: 5px
+		}
+
+		.panel-default {
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			border-color: #ccc
+		}
+
+		.btn-block {
+			border-radius: 0 0 3px 3px
+		}
+
+		.nav-tabs {
+			border-color: #ccc
+		}
+
+		.nav-tabs>li.active>a,
+		.nav-tabs>li.active>a:hover,
+		.nav-tabs>li.active>a:focus {
+			border-color: #ccc;
+			border-bottom-color: #f0f6fd;
+			background-color: transparent;
+			background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(1, rgba(255, 255, 255, 0)));
+			background-image: -webkit-linear-gradient(bottom, #fff, rgba(255, 255, 255, 0));
+			background-image: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0))
+		}
+
+		.nav-tabs>li>a {
+			-webkit-transition: .2s;
+			transition: .2s
+		}
+
+		h1>a:not(:hover):not(:focus) {
+			color: #000 !important
+		}
+
+		.well {
+			padding: 10px
+		}
+
+		.well>p {
+			margin: 0;
+			-webkit-transition: .2s;
+			transition: .2s
+		}
+
+		.item>p:last-child {
+			margin-bottom: 7px
+		}
+
+		.well>p,
+		.text-md {
+			font-size: 100%
+		}
+
+		.text-lg {
+			font-size: 125% !important
+		}
+
+		.text-xl {
+			font-size: 150% !important
+		}
+
+		:-webkit-full-screen [data-fullscreen] {
+			display: none
+		}
+
+		:-moz-full-screen [data-fullscreen] {
+			display: none
+		}
+
+		:-ms-fullscreen [data-fullscreen] {
+			display: none
+		}
+
+		:full-screen [data-fullscreen] {
+			display: none
+		}
+
+		:-webkit-full-screen {
+			width: 100%;
+			height: 100%;
+			overflow: scroll
+		}
+
+		:-moz-full-screen {
+			background-color: #f0f6fd;
+			overflow: scroll
+		}
+
+		:-ms-fullscreen {
+			background-color: #f0f6fd;
+			overflow: scroll
+		}
+
+		.addthis_counter {
+			-moz-box-sizing: content-box;
+			box-sizing: content-box
+		}
+
+		.at300bs {
+			border-radius: 3px;
+			border: 1px #ccc solid;
+			-webkit-transition: .2s;
+			transition: .2s;
+			-webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+			box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2)
+		}
+
+		#input {
+			resize: vertical;
+			border-radius: 3px 3px 0 0
+		}
+
+		@media(max-width:767px) {
+			.col-lg-8 {
+				padding: 0
+			}
+
+			.panel {
+				border-radius: 0
+			}
+		}
+
+		@media(max-width:1199px) {
+			textarea {
+				background-color: #f0f6fd !important
+			}
+		}
+
+		@media(min-width:1200px) {
+			body {
+				background: -webkit-linear-gradient(bottom, #f0f6fd 15%, #fff) no-repeat;
+				background: linear-gradient(to bottom, #f0f6fd 15%, #fff) no-repeat
+			}
+
+			.panel-default {
+				background-color: transparent;
+				border-bottom: 0;
+				border-left: none;
+				background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff), color-stop(0.9, rgba(255, 255, 255, 0)));
+				background-image: -webkit-linear-gradient(bottom, #fff, rgba(255, 255, 255, 0) 90%);
+				background-image: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0) 90%)
+			}
+
+			.tab-content {
+				padding: 15px;
+				border-radius: 3px;
+				border-top: 1px solid #ccc;
+				border-left: 1px solid #ccc
+			}
+
+			.tab-pane>h2 {
+				margin-top: 0
+			}
+
+			.nav-tabs {
+				border: 0
+			}
+		}
+	</style>
 </head>
-<body onload="UpdateSong();">
+
+<body onload="memorize();">
 	<div class="panel-body">
 		<h1>Sélection de chanson</h1>
-		<p >Choisissez une chanson à réviser, puis laissez vous guider :</p>
+		<p>Choisissez une chanson à réviser, puis laissez vous guider :</p>
 
-		<select id="SongSelector" onchange="UpdateSong();">
+		<select id="SongSelector" onchange="memorize();">
 			<option value="">--Sélectionner une chanson ici--</option>
 			<option value="1">The Beatles - Nowhere man</option>
 			<option value="2">Zazie - Je suis un homme</option>
@@ -32,17 +294,6 @@
 	<div id=memorizer class="carousel slide panel-body">
 		<div class=carousel-inner>
 			<div class="active item">
-				<textarea id=input class=form-control placeholder="Enter what you want to memorize here or leave this blank for an example..." rows=10 autofocus></textarea>
-				<p>
-					<button type=button class="btn btn-primary btn-lg btn-block" onclick=memorize()>Help me memorize it!</button>
-				</p>
-				<p id=stats class=text-center>
-					<span id=wordCount class="label label-default" title="Word Count">0 words</span>
-					<span id=paraCount class="label label-default" title="Paragraph/Stanza Count"></span>
-					<span id=timeCount class="label label-default" title="Speaking Time"></span>
-				</p>
-			</div>
-			<div class=item>
 				<div class=row>
 					<div class=col-sm-12>
 						<div class=well>
@@ -51,7 +302,6 @@
 					</div>
 				</div>
 				<p>
-					<button class="btn btn-default btn-lg" onclick="$memorizer.carousel('prev')">Précédent</button>
 					<button data-target=#memorizer class="btn btn-primary btn-lg" data-slide=next>Suivant</button>
 				</p>
 			</div>
@@ -65,7 +315,8 @@
 					</div>
 					<div class="col-sm-6 hidden-xs">
 						<p>
-							Contrairement à l'étape précédente, gardez bien les yeux sur le texte pour vous assurer que vous n'oubliez aucun mot.
+							Contrairement à l'étape précédente, gardez bien les yeux sur le texte pour vous assurer que
+							vous n'oubliez aucun mot.
 						</p>
 					</div>
 				</div>
@@ -90,7 +341,8 @@
 					<div class=col-sm-6>
 						<p class=lead>
 							Troisièmement, <strong>dites le texte sans faire de pause.</strong>.<br>
-							<small>Le texte ci-dessous vous aide en montrant seulement les deux premiers mots de chaque ligne.</small>
+							<small>Le texte ci-dessous vous aide en montrant seulement les deux premiers mots de chaque
+								ligne.</small>
 						</p>
 					</div>
 				</div>
@@ -103,7 +355,8 @@
 					<p id=wordText></p>
 				</div>
 				<p class=lead style=margin-bottom:20px>
-					<small>Si vous avez un doute sur un mot, <a href=#memorizer data-slide-to=1>retournez deux étapes en arrière</a> et relisez la partie qui vous pose des problèmes.</small>
+					<small>Si vous avez un doute sur un mot, <a href=#memorizer data-slide-to=1>retournez deux étapes en
+							arrière</a> et relisez la partie qui vous pose des problèmes.</small>
 				</p>
 				<p>
 					<button data-target=#memorizer class="btn btn-default btn-lg" data-slide=prev>Précédent</button>
@@ -112,14 +365,15 @@
 			</div>
 			<div class=item>
 				<p class=lead>
-					Super ! <strong>Répétez ce processus</strong> plusieurs fois jusqu'à ce que vous ayiez réussi à mémoriser la chanson.<br>
+					Super ! <strong>Répétez ce processus</strong> plusieurs fois jusqu'à ce que vous ayiez réussi à
+					mémoriser la chanson.<br>
 					<small>Essayez de la dire tout de suite par exemple pour tester votre mémoire.</small>
 				</p>
 				<p id=saved>
-					
+
 				</p>
 				<p id=offline>
-					
+
 				</p>
 				<p>
 					<button data-target=#memorizer class="btn btn-default btn-lg" data-slide=prev>Précédent</button>
@@ -132,109 +386,101 @@
 			</div>
 		</div>
 	</div>
-	<script src=https://code.jquery.com/jquery-2.1.3.min.js></script>
-	<script src=https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js></script>
-	<script src=https://cdnjs.cloudflare.com/ajax/libs/autosize.js/1.18.17/jquery.autosize.min.js></script>
-	<script src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5063a96118ad4919" async></script>
+	<script src=https://code.jquery.com/jquery-2.1.3.min.js> </script> <script
+		src=https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js> </script> <script
+		src=https://cdnjs.cloudflare.com/ajax/libs/autosize.js/1.18.17/jquery.autosize.min.js> </script> <script
+		src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5063a96118ad4919" async></script>
 	<script type="text/javascript">
 		$memorizer = $(memorizer);
-		$input = $(input);
 		var fullscreenPossible = memorizer.requestFullScreen || memorizer.webkitRequestFullScreen || memorizer.mozRequestFullScreen || memorizer.msRequestFullscreen,
-		offlinePossible = window.applicationCache && 0 != window.applicationCache.status,
-		testDiv = document.createElement('div');
+			offlinePossible = window.applicationCache && 0 != window.applicationCache.status,
+			testDiv = document.createElement('div');
 		testDiv.style.cssText = '-webkit-filter:blur(2px);filter:blur(2px)';
 		var filtersPossible = testDiv.style.length && (void 0 === document.documentMode || document.documentMode > 9);
 		fullscreenPossible || $('[data-fullscreen]').remove();
 		offlinePossible || offline.remove();
 		filtersPossible || dark.remove();
 		fullscreenPossible || filtersPossible || options.remove();
-		$input.autosize().mouseenter(function () {
-		$(this).focus()
-	});
-	$('body').keydown(function (e) {
-	(e.metaKey || e.ctrlKey) && 13 == e.which ? memorize()  : 70 != e.which || e.metaKey || e.ctrlKey || e.altKey || $input.is(':focus') || applyFullscreen()
-});
-$('a[onclick]').click(function () {
-return !1
-});
-$(document).ready(function () {
-$memorizer.carousel({
-interval: !1
-}).off('.bs').on('slide.bs.carousel', function (e) {
-$(this).children().animate({
-height: $(e.relatedTarget).height()
-}, 500);
-window.setTimeout(function () {
-$('.carousel-inner').removeAttr('style')
-}, 1000)
-})
-});
-function memorize() {
-var e = input.value = input.value.trim() || 'I am the Earth\nAnd the Earth is me.\nEach blade of grass,\nEach honey tree,\nEach bit of mud,\nAnd stick and stone\nIs blood and muscle,\nSkin and bone.\n\n- Jane Yolen';
-normalText.innerHTML = stringToHTML(e);
-letterText.innerHTML = stringToHTML(e.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]([^ \n]*)/gi, function (e, t) {
-return e[0] + t.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]/gi, '_')
-}));
-wordText.innerHTML = stringToHTML(e.replace(/^((\s*[\S]+){0,2}).*/gm, '$1'));
-$memorizer.carousel(1);
-$input.trigger('autosize.resize');
-try {
-localStorage.theText = e;
-$(saved).show()
-} catch (t) {
-$(saved).hide()
-}
-textStats()
-}
-function stringToHTML(e) {
-return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')
-}
-$input.keyup(textStats).change(textStats);
-function textStats() {
-var e = input.value.trim(),
-t = e ? e.split(/\s+/).length : 0,
-n = e.split(/\n\n+/).length,
-r = Math.round(t / 160),
-l = Math.round(t / 100);
-wordCount.innerHTML = t + ' word' + (1 == t ? '' : 's');
-paraCount.innerHTML = n > 2 ? n + ' sections' : '';
-timeCount.innerHTML = r ? r + (r == l ? '' : ' - ' + l) + ' minute' + (1 == l ? '' : 's')  : ''
-}
-$('a.text-md').click(function () {
-$('.well > p').removeClass('text-lg text-xl');
-$('a.text-lg, a.text-xl').removeClass('text-muted');
-$('a.text-md').addClass('text-muted');
-return !1
-});
-$('a.text-lg').click(function () {
-$('.well > p').removeClass('text-xl').addClass('text-lg');
-$('a.text-md, a.text-xl').removeClass('text-muted');
-$('a.text-lg').addClass('text-muted');
-return !1
-});
-$('a.text-xl').click(function () {
-$('.well > p').removeClass('text-lg').addClass('text-xl');
-$('a.text-md, a.text-lg').removeClass('text-muted');
-$('a.text-xl').addClass('text-muted');
-return !1
-});
-function clearMemory() {
-localStorage.removeItem('theText');
-input.value = '';
-$input.trigger('autosize.resize');
-textStats();
-$(saved).hide()
-}
-function applyFullscreen() {
-memorizer.webkitRequestFullscreen ? memorizer.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT)  : (memorizer.requestFullscreen || memorizer.msRequestFullscreen || memorizer.mozRequestFullScreen) ()
-}
-function darkMode() {
-$(document.documentElement).toggleClass('dark');
-$(dark).toggleClass('active')
-}
+		$('body').keydown(function (e) {
+			(e.metaKey || e.ctrlKey) && 13 == e.which ? memorize() : 70 != e.which || e.metaKey || e.ctrlKey || e.altKey || $input.is(':focus') || applyFullscreen()
+		});
+		$('a[onclick]').click(function () {
+			return !1
+		});
+		$(document).ready(function () {
+			$memorizer.carousel({
+				interval: !1
+			}).off('.bs').on('slide.bs.carousel', function (e) {
+				$(this).children().animate({
+					height: $(e.relatedTarget).height()
+				}, 500);
+				window.setTimeout(function () {
+					$('.carousel-inner').removeAttr('style')
+				}, 1000)
+			})
+		});
+		function memorize() {
+			select = document.getElementById("SongSelector");
+			selected_value = select.options[select.selectedIndex].text;
+			if (selected_value in song_dict) {
+				value = song_dict[selected_value];
+				normalText.innerHTML = stringToHTML(value);
+				letterText.innerHTML = stringToHTML(value.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]([^ \n]*)/gi, function (e, t) {
+					return e[0] + t.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]/gi, '_')
+				}));
+				wordText.innerHTML = stringToHTML(value.replace(/^((\s*[\S]+){0,2}).*/gm, '$1'));
+				$memorizer.carousel(0);
+			}
+		}
+		function stringToHTML(e) {
+			return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')
+		}
+		function textStats() {
+			var e = input.value.trim(),
+				t = e ? e.split(/\s+/).length : 0,
+				n = e.split(/\n\n+/).length,
+				r = Math.round(t / 160),
+				l = Math.round(t / 100);
+			wordCount.innerHTML = t + ' word' + (1 == t ? '' : 's');
+			paraCount.innerHTML = n > 2 ? n + ' sections' : '';
+			timeCount.innerHTML = r ? r + (r == l ? '' : ' - ' + l) + ' minute' + (1 == l ? '' : 's') : ''
+		}
+		$('a.text-md').click(function () {
+			$('.well > p').removeClass('text-lg text-xl');
+			$('a.text-lg, a.text-xl').removeClass('text-muted');
+			$('a.text-md').addClass('text-muted');
+			return !1
+		});
+		$('a.text-lg').click(function () {
+			$('.well > p').removeClass('text-xl').addClass('text-lg');
+			$('a.text-md, a.text-xl').removeClass('text-muted');
+			$('a.text-lg').addClass('text-muted');
+			return !1
+		});
+		$('a.text-xl').click(function () {
+			$('.well > p').removeClass('text-lg').addClass('text-xl');
+			$('a.text-md, a.text-lg').removeClass('text-muted');
+			$('a.text-xl').addClass('text-muted');
+			return !1
+		});
+		function clearMemory() {
+			localStorage.removeItem('theText');
+			input.value = '';
+			$input.trigger('autosize.resize');
+			textStats();
+			$(saved).hide()
+		}
+		function applyFullscreen() {
+			memorizer.webkitRequestFullscreen ? memorizer.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT) : (memorizer.requestFullscreen || memorizer.msRequestFullscreen || memorizer.mozRequestFullScreen)()
+		}
+		function darkMode() {
+			$(document.documentElement).toggleClass('dark');
+			$(dark).toggleClass('active')
+		}
 
 
-song_dict = {'The Beatles - Nowhere man': `He's a real nowhere man
+		song_dict = {
+			'The Beatles - Nowhere man': `He's a real nowhere man
 Sitting in his nowhere land
 Making all his nowhere plans for nobody
 
@@ -267,8 +513,8 @@ He's a real nowhere man
 Sitting in his nowhere land
 Making all his nowhere plans for nobody
 Making all his nowhere plans for nobody
-Making all his nowhere plans for nobody`, 
-'Zazie - Je suis un homme': `Je suis un homme de Cro-Magnon
+Making all his nowhere plans for nobody`,
+			'Zazie - Je suis un homme': `Je suis un homme de Cro-Magnon
 Je suis un singe ou un poisson
 Sur la Terre en toute saison
 Moi je tourne en rond, je tourne en rond.
@@ -329,7 +575,8 @@ Toute l'horreur de ma nature
 Pour ma peine, ma punition,
 Moi je tourne en rond, je tourne en rond
 
-Moi je tourne en rond, je tourne en rond`, 
-'--Sélectionner une chanson ici--': 'Pas de chanson choisie.'};
-</script>
+Moi je tourne en rond, je tourne en rond`,
+			'--Sélectionner une chanson ici--': 'Pas de chanson choisie.'
+		};
+	</script>
 </body>
