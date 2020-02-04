@@ -289,6 +289,12 @@
 			<option value="">--Sélectionner une chanson ici--</option>
 			<option value="1">The Beatles - Nowhere man</option>
 			<option value="2">Zazie - Je suis un homme</option>
+			<option>Marvin Gaye & Tammi Terrell - Aint no mountain high enough</option>
+			<option>Dexys Midnight Runners - Come on Eileen</option>
+			<option>The Turtles - Happy together</option>
+			<option>Womack & Womack - Teardrops</option>
+			<option>Joan Osborne - What if God was one of us</option>
+			<option>Elvis - Cant help falling in love with you</option>
 		</select>
 	</div>
 	<div id=memorizer class="carousel slide panel-body">
@@ -389,98 +395,98 @@
 	<script src=https://code.jquery.com/jquery-2.1.3.min.js> </script> <script
 		src=https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js> </script> <script
 		src=https://cdnjs.cloudflare.com/ajax/libs/autosize.js/1.18.17/jquery.autosize.min.js> </script> <script
-		src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5063a96118ad4919" async></script>
-	<script type="text/javascript">
-		$memorizer = $(memorizer);
-		var fullscreenPossible = memorizer.requestFullScreen || memorizer.webkitRequestFullScreen || memorizer.mozRequestFullScreen || memorizer.msRequestFullscreen,
-			offlinePossible = window.applicationCache && 0 != window.applicationCache.status,
-			testDiv = document.createElement('div');
-		testDiv.style.cssText = '-webkit-filter:blur(2px);filter:blur(2px)';
-		var filtersPossible = testDiv.style.length && (void 0 === document.documentMode || document.documentMode > 9);
-		fullscreenPossible || $('[data-fullscreen]').remove();
-		offlinePossible || offline.remove();
-		filtersPossible || dark.remove();
-		fullscreenPossible || filtersPossible || options.remove();
-		$('body').keydown(function (e) {
-			(e.metaKey || e.ctrlKey) && 13 == e.which ? memorize() : 70 != e.which || e.metaKey || e.ctrlKey || e.altKey || $input.is(':focus') || applyFullscreen()
-		});
-		$('a[onclick]').click(function () {
-			return !1
-		});
-		$(document).ready(function () {
-			$memorizer.carousel({
-				interval: !1
-			}).off('.bs').on('slide.bs.carousel', function (e) {
-				$(this).children().animate({
-					height: $(e.relatedTarget).height()
-				}, 500);
-				window.setTimeout(function () {
-					$('.carousel-inner').removeAttr('style')
-				}, 1000)
-			})
-		});
-		function memorize() {
-			select = document.getElementById("SongSelector");
-			selected_value = select.options[select.selectedIndex].text;
-			if (selected_value in song_dict) {
-				value = song_dict[selected_value];
-				normalText.innerHTML = stringToHTML(value);
-				letterText.innerHTML = stringToHTML(value.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]([^ \n]*)/gi, function (e, t) {
-					return e[0] + t.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]/gi, '_')
-				}));
-				wordText.innerHTML = stringToHTML(value.replace(/^((\s*[\S]+){0,2}).*/gm, '$1'));
-				$memorizer.carousel(0);
+		type="text/javascript">
+			$memorizer = $(memorizer);
+			var fullscreenPossible = memorizer.requestFullScreen || memorizer.webkitRequestFullScreen || memorizer.mozRequestFullScreen || memorizer.msRequestFullscreen,
+				offlinePossible = window.applicationCache && 0 != window.applicationCache.status,
+				testDiv = document.createElement('div');
+			testDiv.style.cssText = '-webkit-filter:blur(2px);filter:blur(2px)';
+			var filtersPossible = testDiv.style.length && (void 0 === document.documentMode || document.documentMode > 9);
+			fullscreenPossible || $('[data-fullscreen]').remove();
+			offlinePossible || offline.remove();
+			filtersPossible || dark.remove();
+			fullscreenPossible || filtersPossible || options.remove();
+			$('body').keydown(function (e) {
+				(e.metaKey || e.ctrlKey) && 13 == e.which ? memorize() : 70 != e.which || e.metaKey || e.ctrlKey || e.altKey || $input.is(':focus') || applyFullscreen()
+			});
+			$('a[onclick]').click(function () {
+				return !1
+			});
+			$(document).ready(function () {
+				$memorizer.carousel({
+					interval: !1
+				}).off('.bs').on('slide.bs.carousel', function (e) {
+					$(this).children().animate({
+						height: $(e.relatedTarget).height()
+					}, 500);
+					window.setTimeout(function () {
+						$('.carousel-inner').removeAttr('style')
+					}, 1000)
+				})
+			});
+			function memorize() {
+				select = document.getElementById("SongSelector");
+				selected_value = select.options[select.selectedIndex].text;
+				if (selected_value in song_dict) {
+					value = song_dict[selected_value];
+					normalText.innerHTML = stringToHTML(value);
+					letterText.innerHTML = stringToHTML(value.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]([^ \n]*)/gi, function (e, t) {
+						return e[0] + t.replace(/[^ ,\.!\?:;—\–\-„“”«»`’¿¡~\[\]\{\}\(\)\*&\^%‰¤\$¢£€₧¥₣₤'"\/<>#@\|\u0964\\\n]/gi, '_')
+					}));
+					wordText.innerHTML = stringToHTML(value.replace(/^((\s*[\S]+){0,2}).*/gm, '$1'));
+					$memorizer.carousel(0);
+				}
 			}
-		}
-		function stringToHTML(e) {
-			return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')
-		}
-		function textStats() {
-			var e = input.value.trim(),
-				t = e ? e.split(/\s+/).length : 0,
-				n = e.split(/\n\n+/).length,
-				r = Math.round(t / 160),
-				l = Math.round(t / 100);
-			wordCount.innerHTML = t + ' word' + (1 == t ? '' : 's');
-			paraCount.innerHTML = n > 2 ? n + ' sections' : '';
-			timeCount.innerHTML = r ? r + (r == l ? '' : ' - ' + l) + ' minute' + (1 == l ? '' : 's') : ''
-		}
-		$('a.text-md').click(function () {
-			$('.well > p').removeClass('text-lg text-xl');
-			$('a.text-lg, a.text-xl').removeClass('text-muted');
-			$('a.text-md').addClass('text-muted');
-			return !1
-		});
-		$('a.text-lg').click(function () {
-			$('.well > p').removeClass('text-xl').addClass('text-lg');
-			$('a.text-md, a.text-xl').removeClass('text-muted');
-			$('a.text-lg').addClass('text-muted');
-			return !1
-		});
-		$('a.text-xl').click(function () {
-			$('.well > p').removeClass('text-lg').addClass('text-xl');
-			$('a.text-md, a.text-lg').removeClass('text-muted');
-			$('a.text-xl').addClass('text-muted');
-			return !1
-		});
-		function clearMemory() {
-			localStorage.removeItem('theText');
-			input.value = '';
-			$input.trigger('autosize.resize');
-			textStats();
-			$(saved).hide()
-		}
-		function applyFullscreen() {
-			memorizer.webkitRequestFullscreen ? memorizer.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT) : (memorizer.requestFullscreen || memorizer.msRequestFullscreen || memorizer.mozRequestFullScreen)()
-		}
-		function darkMode() {
-			$(document.documentElement).toggleClass('dark');
-			$(dark).toggleClass('active')
-		}
+			function stringToHTML(e) {
+				return e.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')
+			}
+			function textStats() {
+				var e = input.value.trim(),
+					t = e ? e.split(/\s+/).length : 0,
+					n = e.split(/\n\n+/).length,
+					r = Math.round(t / 160),
+					l = Math.round(t / 100);
+				wordCount.innerHTML = t + ' word' + (1 == t ? '' : 's');
+				paraCount.innerHTML = n > 2 ? n + ' sections' : '';
+				timeCount.innerHTML = r ? r + (r == l ? '' : ' - ' + l) + ' minute' + (1 == l ? '' : 's') : ''
+			}
+			$('a.text-md').click(function () {
+				$('.well > p').removeClass('text-lg text-xl');
+				$('a.text-lg, a.text-xl').removeClass('text-muted');
+				$('a.text-md').addClass('text-muted');
+				return !1
+			});
+			$('a.text-lg').click(function () {
+				$('.well > p').removeClass('text-xl').addClass('text-lg');
+				$('a.text-md, a.text-xl').removeClass('text-muted');
+				$('a.text-lg').addClass('text-muted');
+				return !1
+			});
+			$('a.text-xl').click(function () {
+				$('.well > p').removeClass('text-lg').addClass('text-xl');
+				$('a.text-md, a.text-lg').removeClass('text-muted');
+				$('a.text-xl').addClass('text-muted');
+				return !1
+			});
+			function clearMemory() {
+				localStorage.removeItem('theText');
+				input.value = '';
+				$input.trigger('autosize.resize');
+				textStats();
+				$(saved).hide()
+			}
+			function applyFullscreen() {
+				memorizer.webkitRequestFullscreen ? memorizer.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT) : (memorizer.requestFullscreen || memorizer.msRequestFullscreen || memorizer.mozRequestFullScreen)()
+			}
+			function darkMode() {
+				$(document.documentElement).toggleClass('dark');
+				$(dark).toggleClass('active')
+			}
 
 
-		song_dict = {
-			'The Beatles - Nowhere man': `He's a real nowhere man
+			song_dict = {
+				'--Sélectionner une chanson ici--': 'Pas de chanson choisie.',
+				'The Beatles - Nowhere man': `He's a real nowhere man
 Sitting in his nowhere land
 Making all his nowhere plans for nobody
 
@@ -514,7 +520,7 @@ Sitting in his nowhere land
 Making all his nowhere plans for nobody
 Making all his nowhere plans for nobody
 Making all his nowhere plans for nobody`,
-			'Zazie - Je suis un homme': `Je suis un homme de Cro-Magnon
+				'Zazie - Je suis un homme': `Je suis un homme de Cro-Magnon
 Je suis un singe ou un poisson
 Sur la Terre en toute saison
 Moi je tourne en rond, je tourne en rond.
@@ -576,7 +582,287 @@ Pour ma peine, ma punition,
 Moi je tourne en rond, je tourne en rond
 
 Moi je tourne en rond, je tourne en rond`,
-			'--Sélectionner une chanson ici--': 'Pas de chanson choisie.'
-		};
-	</script>
+				'Marvin Gaye & Tammi Terrell - Aint no mountain high enough': `Listen baby, ain't no mountain high,
+Ain't no valley low, ain't no river wide enough baby
+If you need me call me no matter where you are,
+No matter how far; don't worry baby
+Just call my name; I'll be there in a hurry
+You don't have to worry,
+
+Oh baby there ain't no mountain high enough,
+Ain't no valley low enough,
+Ain't no river wide enough
+To keep me from getting to you babe
+
+Remember the day I set you free
+I told you you could always count on me darling
+From that day on, I made a vow,
+I'll be there when you want me,
+Some way, some how
+
+Oh baby there ain't no mountain high enough,
+Ain't no valley low enough,
+Ain't no river wide enough
+To keep me from getting to you babe
+
+
+Oh no darling
+No wind, no rain
+Or winters cold can stop me baby, na na baby
+'Cause you are my goal
+If you're ever in trouble;
+I'll be there on the double
+Just send for me, oh baby, ha
+
+My love is alive
+Way down in my heart
+Although we are miles apart
+If you ever need a helping hand,
+I'll be there on the double
+Just as fast as I can
+Don't you know that there
+
+Ain't no mountain high enough,
+Ain't no valley low enough,
+Ain't no river wide enough
+To keep me from getting to you babe
+
+Don'tcha know that there
+Ain't no mountain high enough,
+Ain't no valley low enough,
+Ain't no river wide enough
+Ain't mountain high enough
+Ain't no valley low enough`,
+				'Dexys Midnight Runners - Come on Eileen': `Poor old Johnny Ray
+Sounded sad upon the radio
+Moved a million hearts in mono
+Our mothers cried
+Sang along, who'd blame them?
+
+You're grown (you're grown up)
+So grown (so grown up)
+Now I must say more than ever
+(Come on Eileen)
+Toora loora toora loo rye ay
+And we can sing just like our fathers
+
+Come on Eileen, oh I swear what he means
+At this moment, you mean everything
+You in that dress, my thoughts I confess
+Verge on dirty, ah, come on Eileen
+
+Come on Eileen
+
+
+These people round here
+Wear beatdown eyes sunk in smoke dried face
+So resigned to what their fate is
+
+But not us (no never)
+No not us (no never)
+We are far too young and clever
+
+(Remember)
+Toora loora, toora loo rye ay
+Eileen, I'll hum this tune forever
+
+Come on Eileen, oh I swear (what he means)
+Ah come on let's, take off everything
+Pretty red dress, Eileen, tell him yes
+Ah come on let's, ah, come on Eileen
+That pretty red dress, Eileen, tell him yes
+Ah, come on let's, ah come on Eileen, please
+
+Come on Eileen, too loo rye ay
+Come on Eileen, too loo rye ay
+Now you have grown, and now you have shown
+Oh, Eileen
+
+
+Said
+Come on Eileen, too loo rye ay
+Come on Eileen, too loo rye ay
+Now I must say more than ever
+Things round here change
+I said, toora loora, toora loo rye ay
+
+Come on Eileen, oh I swear what he means
+At this moment, you mean everything
+You in that dress, my thoughts I confess
+Verge on dirty, ah come on Eileen
+
+Come on Eileen, oh I swear what he means
+At this moment, you mean everything
+In that dress, oh my thoughts, I confess
+Well, they're dirty, come on Eileen
+
+Come on Eileen`,
+				'The Turtles - Happy together': `Imagine me and you, I do
+I think about you day and night
+It's only right
+To think about the girl you love
+And hold her tight
+So happy together
+
+If I should call you up, invest a dime
+And you say you belong to me
+And ease my mind
+Imagine how the world could be
+So very fine
+So happy together
+
+I can't see me lovin' nobody but you for all my life
+When you're with me, baby, the skies will be blue for all my life
+
+
+Me and you, and you and me
+No matter how they tossed the dice
+It had to be
+The only one for me is you
+And you for me
+So happy together
+
+I can't see me lovin' nobody but you for all my life
+When you're with me, baby, the skies will be blue for all my life
+
+Me and you and you and me
+No matter how they tossed the dice
+It had to be
+The only one for me is you
+And you for me
+So happy together
+
+Me and you and you and me
+No matter how they tossed the dice
+It had to be
+The only one for me is you
+And you for me
+So happy together
+So happy together
+And how is the weather?
+
+
+So happy together
+We're happy together
+So happy together
+We're happy together
+So happy together
+So happy together`,
+				'Womack & Womack - Teardrops': `Whenever I hear goodbyes
+(Reminds me baby of you)
+I break down and cry
+(Next time I'll be true, yeah)
+Fever for lost romance
+(Reminds me baby of you)
+I took a crazy chance
+(Next time I'll be true)
+I'll be true, I'll be true
+
+
+Footsteps on the dance floor
+(Reminds me baby of you)
+Teardrops in my eyes
+(Next time i'll be true, yeah)
+Whispers in the powder room
+(She cries on every tune, every tune, every tune)
+When I'm dancing 'round
+(Reminds me baby of you)
+I really let you down
+(Next time i'll be true, yeah)
+I took a crazy chance
+(She cries on every tune, every tune, every tune)
+Footsteps on the dance floor
+(Reminds me baby of you)
+Teardrops in my eyes
+(Next time i'll be true, yeah)
+Whispers in the powder room
+(She cries on every tune, every tune, every tune)
+And the music
+Don't feel like it did when I felt it with you
+Nothing that I do or feel ever feels like I felt it with you
+Hurting deep inside
+(She cries on every tune)
+I break down and cry
+(She cries on every tune, every tune, every tune)
+Footsteps on the dance floor
+(Reminds me baby of you)
+Teardrops in my eyes
+(Next time i'll be true, yeah)
+Whispers in the powder room
+(She cries on every tune, every tune, every tune)`,
+				'Joan Osborne - What if God was one of us': `If God had a name what would it be?
+And would you call it to his face?
+If you were faced with him in all his glory
+what would you ask if you had just one question?
+
+Yeah, Yeah, God is great
+Yeah, Yeah, God is good
+Yeah Yeah yeah yeah yeah
+
+What if God was one of us?
+Just a slob like one of us
+Just a stranger on the bus
+Trying to make his way home
+
+If God had a face
+What would it look like?
+And would you want to see
+If seeing meant that you would have to believe
+In things like heaven and Jesus and the saints
+and all the Prophets
+
+
+Yeah Yeah God is great
+Yeah Yeah God is good
+Yeah Yeah yeah yeah yeah
+
+What if God was one of us?
+Just a slob like one of us
+Just a stranger on the bus
+Trying to make his way home
+Just trying to make his way home
+Back up to Heaven all alone
+Nobody callin' on the phone
+cept for the Pope maybe in Rome
+
+Yeah Yeah God is great
+Yeah Yeah God is good
+Yeah Yeah yeah yeah
+
+
+What if God was one of us?
+Just a slob like one of us
+Just a stranger on the bus
+Trying to make his way home
+Like a holly Rolling Stone
+Back up to Heaven all alone
+Just trying to make his way home
+Nobody callin' on the phone
+'cept for the Pope maybe in Rom`,
+				'Elvis - Cant help falling in love with you': `Wise men say 
+only fools rush in
+But I can't help falling in love with you
+
+Shall I stay?
+Would it be a sin
+If I can't help falling in love with you?
+
+Like a river flows surely to the sea
+Darling so it goes
+Some things are meant to be
+
+Take my hand
+take my whole life too
+For I can't help falling in love with you
+
+Like a river flows surely to the sea
+Darling so it goes
+Some things are meant to be
+
+Take my hand
+ take my whole life too
+For I can't help falling in love with you
+For I can't help falling in love with you`
+			};
+		</script>
 </body>
